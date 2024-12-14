@@ -8,7 +8,7 @@ import { createPortal } from "react-dom";
 const Modal = ({ onClose, toggleAudio }) => {
     return createPortal(
         <div className="
-        fixed inset-0 bg-background/60 background-blur-sm flex items-center justify-center 
+        fixed inset-0 bg-background background-blur-sm flex items-center justify-center 
         ">
             <div className="
             bg-background/20 border border-accent/30 border-solid background-blur-[6px]
