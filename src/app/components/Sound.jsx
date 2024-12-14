@@ -11,7 +11,7 @@ const Modal = ({ onClose, toggleAudio }) => {
         fixed inset-0 bg-background/60 background-blur-md flex items-center justify-center 
         ">
             <div className="
-            bg-background/60 border border-accent/30 border-solid background-blur-[8px]
+            bg-background border border-accent/30 border-solid background-blur-[6px]
             py-8 px-4 xs:px-10 sm:px-16 rounded shadow-glass-inset space-y-4 text-center z-50
             ">
                 <p className="
