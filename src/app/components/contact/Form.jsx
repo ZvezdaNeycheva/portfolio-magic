@@ -4,6 +4,23 @@ import { useForm } from 'react-hook-form';
 import { Toaster, toast } from 'sonner';
 import { MailCheck, MailX } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import { motion } from "framer-motion";
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.3,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const item = {
+  hidden: { scale: 0 },
+  show: { scale: 1 },
+};
 
 const sendEmail = async (params) => {
     try {
@@ -87,11 +104,15 @@ export default function Form() {
     return (
         <>
             <Toaster position="bottom-left" richColors />
-            <form onSubmit={handleSubmit(onSubmit)} className="max-w-md w-full flex flex-col items-center justify-center space-y-4">
+            <motion.form
+        variants={container}
+        initial="hidden"
+        animate="show" onSubmit={handleSubmit(onSubmit)} className="max-w-md w-full flex flex-col items-center justify-center space-y-4">
                 
                 {/* Name input */}
                 <label htmlFor="name" className="self-start">Name</label>
-                <input
+                <motion.input
+                    variants={item}
                     id="name"
                     type="text"
                     placeholder="Name"
@@ -107,7 +128,8 @@ export default function Form() {
                 
                  {/* Email input */}
                  <label htmlFor="email" className="self-start">Email</label>
-                <input
+                <motion.input
+                    variants={item}
                     id="email"
                     type="email"
                     placeholder="Email"
@@ -122,7 +144,8 @@ export default function Form() {
                 
                 {/* Message input */}
                 <label htmlFor="message" className="self-start">Message</label>
-                <textarea
+                <motion.textarea
+                    variants={item}
                     id="message"
                     placeholder="Message"
                     {...register("message", {
@@ -135,12 +158,13 @@ export default function Form() {
                 />
                 {errors.message && <span className="inline-block self-start text-red-500">{errors.message.message}</span>}
                 
-                <input
+                <motion.input
+                    variants={item}
                     value="Cast your message!"
                     className="px-10 py-4 rounded-md shadow-lg bg-background border border-accent/30 hover:shadow-glass-sm backdrop-blur-sm text-foreground focus:outline-none focus:ring-2 focus:ring-accent/50 cursor-pointer capitalize"
                     type="submit"
                 />
-            </form>
+            </motion.form>
         </>
     );
 }
