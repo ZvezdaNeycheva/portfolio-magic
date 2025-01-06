@@ -37,17 +37,17 @@ export const projectsData = [
     {
       id: 5,
       name: "Portfolio",
-      description: "Portfolio with 3D models.",
+      description: "Portfolio with 3D models, just part of my learning journey.",
       date: "2024-11",
       demoLink: "https://github.com/DreamersJS/3D-portfolio",
     },
-    // {
-    //   id: 6,
-    //   name: "Wellness website",
-    //   description: "",
-    //   date: "2024-12",
-    //   demoLink: "https://github.com/DreamersJS/website17",
-    // },
+    {
+      id: 6,
+      name: "Wellness website",
+      description: "Coming Soon!",
+      date: "2024-12",
+      demoLink: "https://github.com/DreamersJS/website17",
+    },
   
   ];
   
