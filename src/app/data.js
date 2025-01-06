@@ -9,7 +9,7 @@ export const projectsData = [
     {
       id: 2,
       name: "Socket.io Chat App",
-      description: "Chat application with user authentication and real-time messaging.",
+      description: "Chat application with real-time messaging, REST APIs and Express server.",
       date: "2024-08",
       demoLink: "https://github.com/DreamersJS/express-project1",
     },
@@ -33,6 +33,20 @@ export const projectsData = [
     //   description: "Riddles application where users can solve riddles and view the answers.",
     //   date: "2024-12",
     //   demoLink: "riddles-eight.vercel.app/",
+    // },
+    {
+      id: 5,
+      name: "Portfolio",
+      description: "Portfolio with 3D models.",
+      date: "2024-11",
+      demoLink: "https://github.com/DreamersJS/3D-portfolio",
+    },
+    // {
+    //   id: 6,
+    //   name: "Wellness website",
+    //   description: "",
+    //   date: "2024-12",
+    //   demoLink: "https://github.com/DreamersJS/website17",
     // },
   
   ];
