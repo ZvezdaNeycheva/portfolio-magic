@@ -1,8 +1,9 @@
+import AssetPreloader from "@/components/AssetPreloader";
 import "./globals.css";
 import clsx from "clsx";
-import FirefliesBackground from "@/app/components/FirefliesBackground";
-import Sound from "./components/Sound";
-import AssetPreloader from './components/AssetPreloader';
+import FirefliesBackground from "@/components/FirefliesBackground";
+import Sound from "@/components/Sound";
+
 
 export const metadata = {
   title: "Portfolio with 3D models",

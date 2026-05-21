@@ -1,11 +1,11 @@
 'use client';
 import Image from "next/image";
 import bg from "../../public/background/home-background.png";
-import RenderModel from '@/app/components/RenderModel'
-import Nav from "./components/nav/NavCircle";
+import RenderModel from '@/components/RenderModel'
+import Nav from "@/components/nav/NavCircle";
 import dynamic from "next/dynamic";
 
-const Wizard = dynamic(() => import('@/app/components/models/Wizard'), { ssr: false });
+const Wizard = dynamic(() => import('@/components/models/Wizard'), { ssr: false });
 
 export default function Home() {
   return (
