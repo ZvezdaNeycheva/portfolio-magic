@@ -1,6 +1,6 @@
 import "./globals.css";
 import clsx from "clsx";
-import FirefliesBackground from "@/app/components/FirefliesBackground";
+import FirefliesBackground from "@/components/FirefliesBackground";
 import Sound from "./components/Sound";
 import AssetPreloader from './components/AssetPreloader';
 
