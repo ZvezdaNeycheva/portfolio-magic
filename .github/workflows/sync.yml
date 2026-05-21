@@ -3,9 +3,13 @@ name: Sync Portfolio 3D with Upstream
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   sync:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout fork
         uses: actions/checkout@v4
