@@ -1,5 +1,5 @@
 'use client'
-import ResumeDetails from "@/app/components/resume/index";
+import ResumeDetails from "../../components/resume/index";
 
 export default function Home() {
     return (
