@@ -23,27 +23,23 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
 
-      - name: Add upstream remote
+      - name: Add upstream
         run: |
-          git remote add upstream https://github.com/DreamersJS/3D-portfolio.git
-          git fetch upstream
+          git remote remove upstream || true
+          git remote add upstream https://github.com/Alpha-55-JS-Web-Programming/Final-Project-Team5.git
 
-      - name: Create sync branch
+      - name: Fetch upstream
+        run: git fetch upstream
+
+      - name: Set Git identity
         run: |
-          git checkout -b sync-upstream
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
 
-      - name: Merge upstream manually
+      - name: Merge upstream changes
         run: |
-          git merge upstream/main || true
+          git checkout main
+          git merge upstream/main --allow-unrelated-histories -m "Sync from upstream" || true
 
-      - name: Push branch
-        run: |
-          git push origin sync-upstream --force
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v7
-        with:
-          branch: sync-upstream
-          title: "Manual upstream sync"
-          body: |
-            Review conflicts and choose files manually.
+      - name: Push changes to fork
+        run: git push origin main
