@@ -31,14 +31,16 @@ jobs:
           git switch sync-upstream
       - name: Merge upstream manually
         run: |
-          git merge upstream/main || true
-      - name: Push branch
+          git merge upstream/main --allow-unrelated-histories || true
+      - name: Show conflicts
         run: |
-          git push origin sync-upstream --force
-      - name: Create Pull Request
+          git status
+          
+      - name: Create PR
         uses: peter-evans/create-pull-request@v7
         with:
-          branch: sync-upstream
+          branch: upstream-sync
+          base: main
           title: "Manual upstream sync"
           body: |
-            Review conflicts and choose files manually.
+            Resolve conflicts manually.
