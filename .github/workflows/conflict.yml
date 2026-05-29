@@ -11,29 +11,32 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout sync branch
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
         with:
-          ref: sync-upstream
+          ref: main
           fetch-depth: 0
 
-      - name: Set Git identity
+      - name: Setup git
         run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Add upstream
         run: |
-          git remote remove upstream || true
-          git remote add upstream https://github.com/DreamersJS/3D-portfolio.git
+          git remote add upstream https://github.com/DreamersJS/3D-portfolio.git || true
+          git fetch upstream
 
-      - name: Fetch upstream
-        run: git fetch upstream
+      - name: Create or reset sync branch
+        run: |
+          git checkout -B sync-upstream
 
-      - name: Merge upstream
+      - name: Merge upstream (leave conflicts)
         run: |
           git merge upstream/main --allow-unrelated-histories || true
 
-      - name: Push conflict state
+      - name: Show status
+        run: git status
+
+      - name: Push branch with conflicts
         run: |
           git push origin sync-upstream --force
