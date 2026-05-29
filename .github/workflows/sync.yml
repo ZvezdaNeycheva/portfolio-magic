@@ -41,5 +41,10 @@ jobs:
           git checkout main
           git merge upstream/main --allow-unrelated-histories -m "Sync from upstream" || true
 
+      - name: Debug merge state
+        run: |
+          git status
+          git log --oneline --graph --decorate -5
+    
       - name: Push changes to fork
         run: git push origin main
