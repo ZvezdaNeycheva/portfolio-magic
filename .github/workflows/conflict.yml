@@ -1,0 +1,39 @@
+name: Conflict Sync 3D Portfolio
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout sync branch
+        uses: actions/checkout@v4
+        with:
+          ref: sync-upstream
+          fetch-depth: 0
+
+      - name: Set Git identity
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+
+      - name: Add upstream
+        run: |
+          git remote remove upstream || true
+          git remote add upstream https://github.com/Alpha-55-JS-Web-Programming/Final-Project-Team5.git
+
+      - name: Fetch upstream
+        run: git fetch upstream
+
+      - name: Merge upstream
+        run: |
+          git merge upstream/main --allow-unrelated-histories || true
+
+      - name: Push conflict state
+        run: |
+          git push origin sync-upstream --force
