@@ -25,7 +25,7 @@ jobs:
       - name: Add upstream
         run: |
           git remote remove upstream || true
-          git remote add upstream https://github.com/Alpha-55-JS-Web-Programming/Final-Project-Team5.git
+          git remote add upstream https://github.com/DreamersJS/3D-portfolio.git
 
       - name: Fetch upstream
         run: git fetch upstream
