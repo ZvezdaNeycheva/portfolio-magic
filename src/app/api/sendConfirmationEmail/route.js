@@ -1,0 +1,51 @@
+export const dynamic = "force-dynamic";// redis crashes in build stage
+export const runtime = 'nodejs';
+import { NextResponse } from 'next/server';
+import { connectRedis } from '../../../../service/redisClient';
+import { generateToken, hashToken, storeToken } from '../../../../service/tokenService';
+import { rateLimiter } from '../../../../service/rateLimiter';
+import sendEmail5 from '../../../../service/nodemailer';
+
+export async function POST(req) {
+    const { email } = await req.json();
+    const ip = req.headers.get('x-forwarded-for') || req.socket.remoteAddress || req.ip;
+
+    if (!rateLimiter(ip)) {
+        return NextResponse.json({ message: 'Too many requests, please try again later.' }, { status: 429 });
+    }
+
+    await connectRedis();
+
+    const token = generateToken();
+    const hashedToken = await hashToken(token);
+
+    // Set expiration time (e.g., 1 hour from now)
+    const expiresAt = Date.now() + 3600 * 1000;
+
+    // Store token in Redis
+    try {
+        await storeToken(hashedToken, email, expiresAt )
+    } catch (error) {
+        console.error('Error saving token in Redis:', error);
+        return NextResponse.json({ message: 'Error saving confirmation token to Redis.' }, { status: 500 });
+    }
+
+    // Generate the confirmation link with the plain token
+    const confirmationLink = `${process.env.APP_URL}/api/confirmEmail?token=${token}&email=${email}`;
+    console.log(`Confirmation link: ${confirmationLink}`);
+    try {
+        // Send the confirmation email
+        const templateParams2 = {
+            to: email,
+            subject: "Email confirmation",
+            text: `Please confirm your email by clicking the link: ${confirmationLink}`,
+        };
+
+        await sendEmail5(templateParams2);
+
+        return NextResponse.json({ message: 'Confirmation email sent!' }, { status: 200 });
+    } catch (error) {
+        console.error('Failed to send email:', error);
+        return NextResponse.json({ message: 'Failed to send confirmation email.' }, { status: 500 });
+    }
+}

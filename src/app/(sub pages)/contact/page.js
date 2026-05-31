@@ -1,7 +1,8 @@
 'use client';
 import Image from "next/image";
-import bg from "../../../../public/background/contact-background.png";
+import bg from "../../../../public/background/contact-background.webp";
 import Form from "@/components/contact/Form";
+// import EmailConfirmationForm from "@/components/contact/Email ConfirmationForm";
 
 export default function Contact() {
 
@@ -14,8 +15,11 @@ export default function Contact() {
                     <h1 className="text-4xl font-semibold text-center text-accent capitalize">Summon the wizard</h1>
                     <p className="text-lg text-center font-light">Step into the circle of enchantment and weave your words into the fabric of the cosmos. Whether you seek to conjure collaborations, unlock mysteries, or simply share tales of adventure, your messages are treasured scrolls within this realm. Use the form below to send your missives through the ethereal network, and await the whisper of magic in response.</p>
                 </div>
+
             </article>
             <Form />
+            {/*experiment – EmailConfirmation*/}
+            {/* <EmailConfirmationForm/> */}
         </>
     );
 }
